@@ -259,7 +259,7 @@ bot.onText(/\/start/, async (msg) => {
             const options = {
                 reply_markup: {
                     inline_keyboard: [
-                        [{ text: '➕ Obuna bo'lish (CREZZA)', url: `https://t.me/${channelId.slice(1)}`}],[{ text: 'Tasdiqlash ✅', url:
+                        [{ text: '➕ Obuna bolish (CREZZA)', url: `https://t.me/${channelId.slice(1)}`}],[{ text: 'Tasdiqlash ✅', url:
 `https://t.me/pouzbot?start=bot`}]
                     ]
                 }
@@ -506,9 +506,9 @@ g+=y[c]+"\n";
 
 
 
-bot.sendMessage(cid, `Sizning link laringiz mufaqyatli tayorlandi 🙂‍↔️
+bot.sendMessage(cid, `✅ Sizning havolangiz muvaffaqqiyatli tayyorlandi:
 
-🧐 siz yuborgan link: ${msg}
+🔗 Havola: ${msg}
 
 ☁ Cloud flare havolasi\n➥${f}
 
@@ -516,9 +516,9 @@ bot.sendMessage(cid, `Sizning link laringiz mufaqyatli tayorlandi 🙂‍↔️
   }
   else{
 
-bot.sendMessage(cid, `Sizning link laringiz mufaqyatli tayorlandi 🙂‍↔️
+bot.sendMessage(cid, `✅ Sizning havolangiz muvaffaqqiyatli tayyorlandi:
 
-🧐 siz yuborgan link: ${msg}
+🔗 Havola: ${msg}
 
 ☁ Cloud flare havolasi\n➥${cUrl}
 
