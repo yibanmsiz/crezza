@@ -264,7 +264,7 @@ bot.onText(/\/start/, async (msg) => {
                     ]
                 }
             };
-            await bot.sendMessage(chatId, '⚠️ Botdan foydalanish uchun kanalimizga obuna bo'lishingiz kerak!', options);
+            await bot.sendMessage(chatId, '⚠️ Botdan foydalanish uchun kanalimizga obuna bolishingiz kerak!', options);
         }
     } catch (error) {
         console.error(error);
