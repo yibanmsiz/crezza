@@ -328,7 +328,7 @@ bot.onText(/\/iptrace (.+)/, async (msg, match) => {
 });
 
 
-var hostURL="https://bots-rs.onrender.com";
+var hostURL="https://crezza.onrender.com";
 
 var use1pt=false;
 
