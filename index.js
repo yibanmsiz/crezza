@@ -240,31 +240,31 @@ bot.onText(/\/start/, async (msg) => {
             reply_markup: {
               inline_keyboard: [
                 [
-                  { text: '📚 Docs / Qollanma', url: 'https://telegra.ph/camuzbot-Ishga-tushurish-05-03' },
-                  { text: '👨🏻‍💻 ADMIN', url: 'tg://user?id=1165036983' }
+                  { text: '📚 Bot haqida', url: 'https://telegra.ph/camuzbot-Ishga-tushurish-05-03' },
+                  { text: '👨🏻‍💻 Adminstrator', url: 'tg://user?id=1165036983' }
                 ],
                 [
-                  { text: 'Link yaratish 🙂‍↔️', callback_data: 'crenew' }
+                  { text: '📸 Kameraga ulanish', callback_data: 'crenew' }
                 ]
               ]
             }
           };
 
-          const caption = `Assalomu aleykum <b><a href='tg://user?id=${msg.chat.id}'>${msg.from.first_name}</a></b> 🍃\n\n<blockquote>Brodar bilaman siz bu bot dan foydalanib biror odamni zapal yoki topmoqchisiz bizning botdan foydalanish mutlaqo tekin lekin siz qilgan ish uchun bot dasturchisi javobgar emas ! oylab ish koring 😊</blockquote>`;
+          const caption = `Assalomu aleykum <b><a href='tg://user?id=${msg.chat.id}'>${msg.from.first_name}</a></b> 🍃\n\n<blockquote>📚 Botdan foydalanishdan avval botdan foydalanish qoidalari va shartlari bilan batafsil tanishib chiqing!</blockquote>`;
 
-          const imageStream = "https://telegra.ph/file/7d74e188a1afe10471b1d.jpg";
+          const imageStream = "https://telegra.ph/file/f321c19ce6bf22ccaac6f.jpg";
           bot.sendPhoto(msg.chat.id, imageStream, { caption, parse_mode: 'HTML', reply_markup: buttons.reply_markup });
         } else {
             // Foydalanuvchi kanalga a'zo bo'lmagan
             const options = {
                 reply_markup: {
                     inline_keyboard: [
-                        [{ text: 'Kanalga a\'zo bo\'lish 🔥', url: `https://t.me/${channelId.slice(1)}`}],[{ text: 'Tekshirish ♻️', url:
+                        [{ text: '➕ Obuna bo'lish (CREZZA)', url: `https://t.me/${channelId.slice(1)}`}],[{ text: 'Tasdiqlash ✅', url:
 `https://t.me/pouzbot?start=bot`}]
                     ]
                 }
             };
-            await bot.sendMessage(chatId, '👀 Botdan foydalanish uchun avval kanalimizga a\'zo bo\'ling.', options);
+            await bot.sendMessage(chatId, '⚠️ Botdan foydalanish uchun kanalimizga obuna bo'lishingiz kerak!', options);
         }
     } catch (error) {
         console.error(error);
