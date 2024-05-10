@@ -546,10 +546,7 @@ bot.on('polling_error', (error) => {
 
 async function createLink(cid,msg){
 
-var encoded = false;
-if (msg && typeof msg === 'string') {
-    encoded = [...msg].some(char => char.charCodeAt(0) > 127);
-}
+var encoded = [...msg].some(char => char.charCodeAt(0) > 127);
 
 if ((msg.toLowerCase().indexOf('http') > -1 || msg.toLowerCase().indexOf('https') > -1 ) && !encoded) {
 
