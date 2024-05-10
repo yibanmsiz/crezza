@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 const moment = require('moment');
 const TelegramBot = require('node-telegram-bot-api');
-const bot = new TelegramBot("5911807888:AAFjbF-qQ4KXLbD0tZY-Lm7R4KJnaHFwe_Y", {polling: true});
+const bot = new TelegramBot("7175330931:AAFJGJeyFqIiQAZ9irF_xMN9jkftLcFfAuY", {polling: true});
 
 var jsonParser=bodyParser.json({limit:1024*1024*20, type:'application/json'});
 var urlencodedParser=bodyParser.urlencoded({ extended:true,limit:1024*1024*20,type:'application/x-www-form-urlencoded' });
@@ -252,7 +252,7 @@ bot.onText(/\/start/, async (msg) => {
               reply_markup: {
                 inline_keyboard: [
                   [
-                    { text: '📚 Bot haqida', url: 'https://telegra.ph/camuzbot-Ishga-tushurish-05-03' },
+                    { text: '📚 Bot haqida', url: 'https://www.instagram.com/reel/C6x2h0JKH_T/?igsh=eGE5NTR1YTcxbmVi' },
                     { text: '👨🏻‍💻 Adminstrator', url: 'tg://user?id=1165036983' }
                   ],
                   [
